@@ -700,8 +700,6 @@
         android:textSize="50dp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/row0col3" />
-
-
 </android.support.constraint.ConstraintLayout>
 
 
