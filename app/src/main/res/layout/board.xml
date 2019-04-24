@@ -641,10 +641,11 @@
         android:layout_marginLeft="25dp"
         android:layout_marginBottom="371dp"
         android:background="@drawable/dark_square"
+        android:src="@drawable/whiteRook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row1col0"/>
+        app:layout_constraintTop_toBottomOf="@+id/row1col0" />
 
     <ImageView
         android:id="@+id/row0col1"
@@ -655,7 +656,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col2"
         app:layout_constraintStart_toEndOf="@+id/row0col0"
-        app:layout_constraintTop_toBottomOf="@+id/row1col1" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col1"
+        app:srcCompat="@drawable/whiteKnight" />
 
     <ImageView
         android:id="@+id/row0col2"
@@ -714,7 +716,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col7"
         app:layout_constraintStart_toEndOf="@+id/row0col5"
-        app:layout_constraintTop_toBottomOf="@+id/row1col6" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col6"
+        app:srcCompat="@drawable/whiteKnight" />
 
     <ImageView
         android:id="@+id/row0col7"
@@ -727,7 +730,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/row0col6"
-        app:layout_constraintTop_toBottomOf="@+id/row1col7" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col7"
+        app:srcCompat="@drawable/whiteRook" />
 
     <TextView
         android:id="@+id/textView"
