@@ -613,7 +613,7 @@
         app:layout_constraintTop_toBottomOf="@+id/row2col7" />
 
 
-    <ImageView
+    <ImageButton
         android:id="@+id/row0col0"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -624,7 +624,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row1col0" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col0"
+        app:srcCompat="@drawable/rook" />
 
     <ImageView
         android:id="@+id/row0col1"
