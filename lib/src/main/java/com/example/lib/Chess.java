@@ -5,47 +5,29 @@ package com.example.lib;
  */
 public class Chess {
     Square[][] board = new Square[8][8];
-}
-
-/**
- * Abstract class that represents a chess piece
- */
-abstract class Piece {
-    Color color;
-    Position position;
-    Piece(Color setColor, Position setPosition) {
-        color = setColor;
-        position = setPosition;
-    }
-}
-
-/**
- * Class that represents a pawn
- */
-class Pawn extends Piece {
-    Pawn(Color setColor, Position setPosition) {
-        super(setColor, setPosition);
-    }
-    void move() {
-        position.longitude++;
-    }
-}
-
-/**
- * Class that represents a position on a chess board
- */
-class Position {
-    int latitude;
-    int longitude;
+    board[0][0] = new Square(new Piece(Color.BLACK, Type.ROOK));
 }
 
 /**
  * Class that represents a square on the chess board
  */
 class Square {
-    Position position;
     Piece piece;
-    boolean occupied;
+    Square(Piece setPiece) {
+        piece = setPiece;
+    }
+}
+
+/**
+ * Class that represents a chess piece
+ */
+class Piece {
+    Color color;
+    Type type;
+    Piece(Color setColor, Type setType) {
+        color = setColor;
+        type = setType;
+    }
 }
 
 /**
@@ -54,4 +36,16 @@ class Square {
 class Color {
     public static final Color BLACK = new Color();
     public static final Color WHITE = new Color();
+}
+
+/**
+ * Class that represents the type of a chess piece
+ */
+class Type {
+    public static final Type PAWN = new Type();
+    public static final Type KING = new Type();
+    public static final Type QUEEN = new Type();
+    public static final Type BISHOP = new Type();
+    public static final Type KNIGHT = new Type();
+    public static final Type ROOK = new Type();
 }
