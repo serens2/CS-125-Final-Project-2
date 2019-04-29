@@ -17,9 +17,6 @@ abstract class Piece {
         color = setColor;
         position = setPosition;
     }
-    void setPosition(Position setPosition) {
-        position = setPosition;
-    }
 }
 
 /**
