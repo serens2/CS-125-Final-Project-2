@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView A2 = findViewById(R.id.row1col0);
         ImageView A4 = findViewById(R.id.row3col0);
         move(R.drawable.white_pawn, A2, A4);
+
     }
 
     public void move(int piece, ImageView from, ImageView to) {
