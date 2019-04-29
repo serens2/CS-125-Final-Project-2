@@ -23,11 +23,11 @@ abstract class Piece {
  * Class that represents a pawn
  */
 class Pawn extends Piece {
-    void move() {
-        position.longitude++;
-    }
     Pawn(Color setColor, Position setPosition) {
         super(setColor, setPosition);
+    }
+    void move() {
+        position.longitude++;
     }
 }
 
