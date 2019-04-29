@@ -3,7 +3,9 @@ package com.example.finalprojectattempt;
 import android.Manifest;
 import android.app.DownloadManager;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -105,5 +107,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+
+        ImageView A2 = findViewById(R.id.row1col0);
+        ImageView A4 = findViewById(R.id.row3col0);
+        move(R.drawable.white_pawn, A2, A4);
+    }
+
+    public void move(int piece, ImageView from, ImageView to) {
+        to.setImageResource(piece);
+        from.setImageResource(R.drawable.transparent);
     }
 }

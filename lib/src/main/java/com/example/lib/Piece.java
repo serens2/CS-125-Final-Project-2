@@ -10,8 +10,12 @@ public class Piece {
         color = setColor;
         type = setType;
     }
-    public void move(Square from, Square to) {
-        from.setPiece(this);
-        to.setPiece(null);
+    public boolean move(Square from, Square to) {
+        to.setPiece(this);
+        from.setPiece(null);
+        return true;
+    }
+    public String getColor() {
+        return color;
     }
 }
