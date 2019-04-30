@@ -1,4 +1,4 @@
-package com.example.lib;
+package com.example.finalprojectattempt;
 
 /**
  * Class that represents a game of chess
