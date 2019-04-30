@@ -35,8 +35,8 @@ import com.google.gson.JsonParser;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_COARSE_LOCATION = 88;
-    private ImageView from;
-    private int fromId;
+    private ImageView previousSquare;
+    private int previousSquareId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -706,6 +706,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void move(int piece, ImageView from, ImageView to) {
+        if ((int) from.getTag() == R.drawable.transparent) {
+            return;
+        }
         from.setImageResource(R.drawable.transparent);
         from.setTag(R.drawable.transparent);
         to.setImageResource(piece);
@@ -713,12 +716,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void go(ImageView square) {
-        if (from == null) {
-            from = square;
-            fromId = (int) square.getTag();
+        if (previousSquare == null) {
+            previousSquare = square;
+            previousSquareId = (int) square.getTag();
         } else {
-            move(fromId, from, square);
-            from = null;
+            move(previousSquareId, previousSquare, square);
+            previousSquare = null;
         }
     }
     ImageView row0Co
