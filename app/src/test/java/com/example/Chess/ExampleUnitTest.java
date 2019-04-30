@@ -1,4 +1,4 @@
-package com.example.finalprojectattempt;
+package com.example.Chess;
 
 import org.junit.Test;
 

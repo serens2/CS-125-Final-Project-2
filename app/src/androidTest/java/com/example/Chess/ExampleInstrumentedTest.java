@@ -1,4 +1,4 @@
-package com.example.finalprojectattempt;
+package com.example.Chess;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
