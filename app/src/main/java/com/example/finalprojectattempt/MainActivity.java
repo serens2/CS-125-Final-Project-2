@@ -36,6 +36,7 @@ import com.google.gson.JsonParser;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_COARSE_LOCATION = 88;
     private ImageView from;
+    private int fromId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +183,77 @@ public class MainActivity extends AppCompatActivity {
         final ImageView H6 = findViewById(R.id.row7col5);
         final ImageView H7 = findViewById(R.id.row7col6);
         final ImageView H8 = findViewById(R.id.row7col7);
+
+        A1.setTag(R.drawable.white_rook);
+        A2.setTag(R.drawable.white_knight);
+        A3.setTag(R.drawable.white_bishop);
+        A4.setTag(R.drawable.white_queen);
+        A5.setTag(R.drawable.white_king);
+        A6.setTag(R.drawable.white_bishop);
+        A7.setTag(R.drawable.white_knight);
+        A8.setTag(R.drawable.white_rook);
+
+        B1.setTag(R.drawable.white_pawn);
+        B2.setTag(R.drawable.white_pawn);
+        B3.setTag(R.drawable.white_pawn);
+        B4.setTag(R.drawable.white_pawn);
+        B5.setTag(R.drawable.white_pawn);
+        B6.setTag(R.drawable.white_pawn);
+        B7.setTag(R.drawable.white_pawn);
+        B8.setTag(R.drawable.white_pawn);
+
+        C1.setTag(R.drawable.transparent);
+        C2.setTag(R.drawable.transparent);
+        C3.setTag(R.drawable.transparent);
+        C4.setTag(R.drawable.transparent);
+        C5.setTag(R.drawable.transparent);
+        C6.setTag(R.drawable.transparent);
+        C7.setTag(R.drawable.transparent);
+        C8.setTag(R.drawable.transparent);
+
+        D1.setTag(R.drawable.transparent);
+        D2.setTag(R.drawable.transparent);
+        D3.setTag(R.drawable.transparent);
+        D4.setTag(R.drawable.transparent);
+        D5.setTag(R.drawable.transparent);
+        D6.setTag(R.drawable.transparent);
+        D7.setTag(R.drawable.transparent);
+        D8.setTag(R.drawable.transparent);
+
+        E1.setTag(R.drawable.transparent);
+        E2.setTag(R.drawable.transparent);
+        E3.setTag(R.drawable.transparent);
+        E4.setTag(R.drawable.transparent);
+        E5.setTag(R.drawable.transparent);
+        E6.setTag(R.drawable.transparent);
+        E7.setTag(R.drawable.transparent);
+        E8.setTag(R.drawable.transparent);
+
+        F1.setTag(R.drawable.transparent);
+        F2.setTag(R.drawable.transparent);
+        F3.setTag(R.drawable.transparent);
+        F4.setTag(R.drawable.transparent);
+        F5.setTag(R.drawable.transparent);
+        F6.setTag(R.drawable.transparent);
+        F7.setTag(R.drawable.transparent);
+
+        G1.setTag(R.drawable.black_pawn);
+        G2.setTag(R.drawable.black_pawn);
+        G3.setTag(R.drawable.black_pawn);
+        G4.setTag(R.drawable.black_pawn);
+        G5.setTag(R.drawable.black_pawn);
+        G6.setTag(R.drawable.black_pawn);
+        G7.setTag(R.drawable.black_pawn);
+        G8.setTag(R.drawable.black_pawn);
+
+        H1.setTag(R.drawable.black_rook);
+        H2.setTag(R.drawable.black_knight);
+        H3.setTag(R.drawable.black_bishop);
+        H4.setTag(R.drawable.black_queen);
+        H5.setTag(R.drawable.black_king);
+        H6.setTag(R.drawable.black_bishop);
+        H7.setTag(R.drawable.black_knight);
+        H8.setTag(R.drawable.black_rook);
 
         A1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -635,14 +707,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void move(int piece, ImageView from, ImageView to) {
         from.setImageResource(R.drawable.transparent);
+        from.setTag(R.drawable.transparent);
         to.setImageResource(piece);
+        to.setTag(piece);
     }
 
     public void go(ImageView square) {
         if (from == null) {
             from = square;
+            fromId = (int) square.getTag();
         } else {
-            move(R.drawable.white_pawn, from, square);
+            move(fromId, from, square);
             from = null;
         }
     }
