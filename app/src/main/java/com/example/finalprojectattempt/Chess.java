@@ -90,8 +90,6 @@ public class Chess {
         }
         };
     }
-    Piece pawn = board[0][0].getPiece();
-    Object object = pawn.move(board[0][0], board[0][1]);
     public void move(Piece piece, Square from, Square to) {
         piece.move(from, to);
     }

@@ -702,7 +702,6 @@ public class MainActivity extends AppCompatActivity {
                 go(H8);
             }
         });
-
     }
 
     public void go(ImageView square) {
