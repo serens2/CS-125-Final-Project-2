@@ -1,23 +1,13 @@
-package com.example.finalprojectattempt;
+package com.example.Chess;
 
 import android.Manifest;
-import android.app.DownloadManager;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -29,11 +19,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_COARSE_LOCATION = 88;
@@ -710,7 +697,11 @@ public class MainActivity extends AppCompatActivity {
                 { A1, A2, A3, A4, A5, A6, A7, A8 },
                 { B1, B2, B3, B4, B5, B6, B7, B8 },
                 { C1, C2, C3, C4, C5, C6, C7, C8 },
-                { D1, D2, D3, D4, D5, D6, D7, D8 }, //etc
+                { D1, D2, D3, D4, D5, D6, D7, D8 },
+                { E1, E2, E3, E4, E5, E6, E7, E8 },
+                { F1, F2, F3, F4, F5, F6, F7, F8 },
+                { G1, G2, G3, G4, G5, G6, G7, G8 },
+                { H1, H2, H3, H4, H5, H6, H7, H8 }
         };
 
     }
@@ -740,9 +731,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j].equals(square)) {
-
+                    return 6;
                 }
             }
         }
+        return 2;
     }
 }
