@@ -33,10 +33,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_COARSE_LOCATION = 88;
     private ImageView previousSquare;
     private int previousSquareId;
+    private ImageView[][] board;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -702,6 +705,14 @@ public class MainActivity extends AppCompatActivity {
                 go(H8);
             }
         });
+
+        board = new ImageView[][] {
+                { A1, A2, A3, A4, A5, A6, A7, A8 },
+                { B1, B2, B3, B4, B5, B6, B7, B8 },
+                { C1, C2, C3, C4, C5, C6, C7, C8 },
+                { D1, D2, D3, D4, D5, D6, D7, D8 }, //etc
+        };
+
     }
 
     public void go(ImageView square) {
@@ -718,9 +729,20 @@ public class MainActivity extends AppCompatActivity {
         if ((int) from.getTag() == R.drawable.transparent) {
             return;
         }
+
         from.setImageResource(R.drawable.transparent);
         from.setTag(R.drawable.transparent);
         to.setImageResource(piece);
         to.setTag(piece);
+    }
+
+    public int getLatitude(ImageView square, ImageView[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j].equals(square)) {
+
+                }
+            }
+        }
     }
 }
