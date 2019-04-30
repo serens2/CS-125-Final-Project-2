@@ -15,6 +15,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/white_square"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/row6col0"
         app:layout_constraintEnd_toStartOf="@+id/row7col1"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,13 +55,12 @@
         android:layout_marginTop="25dp"
         android:adjustViewBounds="false"
         android:background="@drawable/dark_square"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toTopOf="@+id/row6col3"
         app:layout_constraintEnd_toStartOf="@+id/row7col4"
         app:layout_constraintStart_toEndOf="@+id/row7col2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_queen" />
+        android:src="@drawable/black_queen" />
 
     <ImageView
         android:id="@+id/row7col4"
@@ -67,12 +68,11 @@
         android:layout_height="45dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/white_square"
-        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/row6col4"
         app:layout_constraintEnd_toStartOf="@+id/row7col5"
         app:layout_constraintStart_toEndOf="@+id/row7col3"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/black_king" />
+        android:src="@drawable/black_king" />
 
     <ImageView
         android:id="@+id/row7col5"
@@ -386,7 +386,6 @@
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:background="@drawable/white_square"
-        android:viewportHeight="45"
         app:layout_constraintBottom_toTopOf="@+id/row2col0"
         app:layout_constraintEnd_toStartOf="@+id/row3col1"
         app:layout_constraintStart_toStartOf="parent"
@@ -648,11 +647,8 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/dark_square"
         android:src="@drawable/white_rook"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/row1col0"
@@ -662,9 +658,7 @@
         android:id="@+id/row0col1"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/white_square"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col2"
         app:layout_constraintStart_toEndOf="@+id/row0col0"
         app:layout_constraintTop_toBottomOf="@+id/row1col1"
@@ -674,33 +668,27 @@
         android:id="@+id/row0col2"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/dark_square"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/white_bishop"
         app:layout_constraintEnd_toStartOf="@+id/row0col3"
         app:layout_constraintStart_toEndOf="@+id/row0col1"
-        app:layout_constraintTop_toBottomOf="@+id/row1col2"
-        app:srcCompat="@drawable/white_bishop" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col2" />
 
     <ImageView
         android:id="@+id/row0col3"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/white_square"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/white_queen"
         app:layout_constraintEnd_toStartOf="@+id/row0col4"
         app:layout_constraintStart_toEndOf="@+id/row0col2"
-        app:layout_constraintTop_toBottomOf="@+id/row1col3"
-        app:srcCompat="@drawable/white_queen" />
+        app:layout_constraintTop_toBottomOf="@+id/row1col3" />
 
     <ImageView
         android:id="@+id/row0col4"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/dark_square"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col5"
         app:layout_constraintStart_toEndOf="@+id/row0col3"
         app:layout_constraintTop_toBottomOf="@+id/row1col4"
@@ -710,9 +698,7 @@
         android:id="@+id/row0col5"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/white_square"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col6"
         app:layout_constraintStart_toEndOf="@+id/row0col4"
         app:layout_constraintTop_toBottomOf="@+id/row1col5"
@@ -722,9 +708,7 @@
         android:id="@+id/row0col6"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/dark_square"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/row0col7"
         app:layout_constraintStart_toEndOf="@+id/row0col5"
         app:layout_constraintTop_toBottomOf="@+id/row1col6"
@@ -735,96 +719,11 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginBottom="371dp"
         android:background="@drawable/white_square"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/row0col6"
         app:layout_constraintTop_toBottomOf="@+id/row1col7"
         app:srcCompat="@drawable/white_rook" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="180dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/green_square"
-        android:text="Player One"
-        android:textSize="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row0col0" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="180dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/red_square"
-        android:text="Player Two"
-        android:textSize="50dp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/row0col3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="340dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:layout_marginBottom="8dp"
-        android:text="Green Color Indicates it is Your Turn"
-        android:textColor="@color/colorBlack"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:text="Score:"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="89dp"
-        android:layout_marginLeft="89dp"
-        android:text="Score:"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/scoreOfPlayer1"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/scoreOfPlayer1"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:text="29"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/scoreOfPlayer2"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
-        android:text="5"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/weather"
@@ -835,6 +734,21 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/turnDisplay"
+        android:layout_width="362dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:text="White to Move"
+        android:textColor="@color/colorBlack"
+        android:textSize="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row0col4" />
 
 </android.support.constraint.ConstraintLayout>
 
