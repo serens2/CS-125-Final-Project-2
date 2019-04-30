@@ -705,16 +705,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void move(int piece, ImageView from, ImageView to) {
-        if ((int) from.getTag() == R.drawable.transparent) {
-            return;
-        }
-        from.setImageResource(R.drawable.transparent);
-        from.setTag(R.drawable.transparent);
-        to.setImageResource(piece);
-        to.setTag(piece);
-    }
-
     public void go(ImageView square) {
         if (previousSquare == null) {
             previousSquare = square;
@@ -723,5 +713,15 @@ public class MainActivity extends AppCompatActivity {
             move(previousSquareId, previousSquare, square);
             previousSquare = null;
         }
+    }
+
+    public void move(int piece, ImageView from, ImageView to) {
+        if ((int) from.getTag() == R.drawable.transparent) {
+            return;
+        }
+        from.setImageResource(R.drawable.transparent);
+        from.setTag(R.drawable.transparent);
+        to.setImageResource(piece);
+        to.setTag(piece);
     }
 }
