@@ -1,5 +1,4 @@
-package com.example.lib;
-
+package  com.example.lib;
 /**
  * Class that represents a chess piece
  */
@@ -11,11 +10,8 @@ public class Piece {
         type = setType;
     }
     public boolean move(Square from, Square to) {
-        to.setPiece(this);
-        from.setPiece(null);
+        from.setPiece(this);
+        to.setPiece(null);
         return true;
-    }
-    public String getColor() {
-        return color;
     }
 }

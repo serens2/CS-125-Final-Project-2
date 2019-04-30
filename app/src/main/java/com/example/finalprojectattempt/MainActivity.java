@@ -118,4 +118,5 @@ public class MainActivity extends AppCompatActivity {
         to.setImageResource(piece);
         from.setImageResource(R.drawable.transparent);
     }
+    ImageView row0Co
 }
