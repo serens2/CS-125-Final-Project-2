@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chess</string>
+    <string name="black_to_move">Black to Move</string>
+    <string name="white_to_move"> White to Move</string>
 </resources>

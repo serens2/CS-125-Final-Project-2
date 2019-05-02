@@ -1,107 +1,31 @@
 package com.example.Chess;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_COARSE_LOCATION = 88;
+    private int WP = R.drawable.white_pawn;
+    private int BP = R.drawable.black_pawn;
+    private int WR = R.drawable.white_rook;
+    private int BR = R.drawable.black_rook;
+    private int WB = R.drawable.white_bishop;
+    private int BB = R.drawable.black_bishop;
+    private int WKn = R.drawable.white_knight;
+    private int BKn = R.drawable.black_knight;
+    private int WQ = R.drawable.white_queen;
+    private int BQ = R.drawable.black_queen;
+    private int WK = R.drawable.white_king;
+    private int BK = R.drawable.black_king;
     private ImageView previousSquare;
     private int previousSquareId;
     private ImageView[][] board;
+    private boolean whiteToMove = true;
+    private TextView turn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
-
-        final TextView weather = findViewById(R.id.weather);
-
-        class Identity<T> {
-            T t;
-            T get() { return t; }
-            void put(T setT) { t = setT; }
-        }
-
-        boolean canAccessCoarseLocation =
-                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-        if (!canAccessCoarseLocation) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_COARSE_LOCATION);
-        }
-
-        final Identity<Double> latitude = new Identity<>();
-        final Identity<Double> longitude = new Identity<>();
-
-
-        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
-                            latitude.put(location.getLatitude());
-                            longitude.put(location.getLongitude());
-                        }
-                    }
-                });
-
-        latitude.put(40.10);
-        longitude.put(-88.23);
-
-        final String errorMessage = "Sunny and 70 degrees";
-        String key = "37bfaa968cb61464140b0506164f63f0";
-        String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude.get() + "&lon=" + longitude.get() + "&units=imperial&APPID=" + key;
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JsonParser parser = new JsonParser();
-                JsonObject result = parser.parse(response).getAsJsonObject();
-                try {
-                    String city = result.get("name").getAsString();
-                    String country = result.getAsJsonObject("sys").get("country").getAsString();
-                    Object description = result.getAsJsonArray("weather").get(0).getAsJsonObject().get("main").getAsString();
-                    long temp = Math.round(result.getAsJsonObject("main").get("temp").getAsDouble());
-                    long visibility = Math.round(result.get("visibility").getAsDouble() / 1609);
-                    long pressure = Math.round(result.getAsJsonObject("main").get("pressure").getAsDouble() / 33.86);
-                    String output = city + ", " + country
-                            + "\n" + description
-                            + "\nTemperature: " + temp + "˚F"
-                            + "\nVisibility: " + visibility + " mi"
-                            + "\nPressure: " + pressure + " inHg";
-                    weather.setText(output);
-                } catch (Exception e) {
-                    weather.setText(errorMessage);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                weather.setText(errorMessage);
-            }
-        });
-        queue.add(stringRequest);
-
         final ImageView A1 = findViewById(R.id.row0col0);
         final ImageView A2 = findViewById(R.id.row0col1);
         final ImageView A3 = findViewById(R.id.row0col2);
@@ -717,24 +641,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void move(int piece, ImageView from, ImageView to) {
+        turn = findViewById(R.id.turnDisplay);
         if ((int) from.getTag() == R.drawable.transparent) {
             return;
         }
-
-        from.setImageResource(R.drawable.transparent);
-        from.setTag(R.drawable.transparent);
-        to.setImageResource(piece);
-        to.setTag(piece);
-    }
-
-    public int getLatitude(ImageView square, ImageView[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].equals(square)) {
-                    return 6;
-                }
+        if (whiteToMove) {
+            if ((int) from.getTag() == BB || (int) from.getTag() == BK || (int) from.getTag() == BKn || (int) from.getTag() == BP || (int) from.getTag() == BQ || (int) from.getTag() == BR) {
+                return;
+            }
+            if ((int) to.getTag() == WB || (int) to.getTag() == WK || (int) to.getTag() == WKn || (int) to.getTag() == WP || (int) to.getTag() == WQ || (int) to.getTag() == WR) {
+                return;
+            }
+            from.setImageResource(R.drawable.transparent);
+            from.setTag(R.drawable.transparent);
+            to.setImageResource(piece);
+            to.setTag(piece);
+            whiteToMove = false;
+            turn.setText(R.string.black_to_move);
+        } else {
+            if ((int) to.getTag() == BB || (int) to.getTag() == BK || (int) to.getTag() == BKn || (int) to.getTag() == BP || (int) to.getTag() == BQ || (int) to.getTag() == BR) {
+                return;
+            }
+            if ((int) from.getTag() == BB || (int) from.getTag() == BK || (int) from.getTag() == BKn || (int) from.getTag() == BP || (int) from.getTag() == BQ || (int) from.getTag() == BR) {
+                from.setImageResource(R.drawable.transparent);
+                from.setTag(R.drawable.transparent);
+                to.setImageResource(piece);
+                to.setTag(piece);
+                whiteToMove = true;
+                turn.setText(R.string.white_to_move);
             }
         }
-        return 2;
     }
 }
