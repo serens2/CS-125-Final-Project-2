@@ -1,7 +1,7 @@
 package com.example.Chess;
 
 /**
- * Class that represents a game of chess
+ * Class that represents a game of chess yes
  */
 public class Chess {
     Square[][] board;
