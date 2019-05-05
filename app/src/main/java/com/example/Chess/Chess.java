@@ -9,24 +9,24 @@ public class Chess {
         board = new Square[][]{
                 {
                         //first row of the board
-                        new Square(new Piece("white", "rook")),
-                        new Square(new Piece("white", "knight")),
-                        new Square(new Piece("white", "bishop")),
-                        new Square(new Piece("white", "queen")),
-                        new Square(new Piece("white", "king")),
-                        new Square(new Piece("white", "bishop")),
-                        new Square(new Piece("white", "knight")),
-                        new Square(new Piece("white", "rook"))
+                        new Square(new Piece("black", "rook")),
+                        new Square(new Piece("black", "knight")),
+                        new Square(new Piece("black", "bishop")),
+                        new Square(new Piece("black", "queen")),
+                        new Square(new Piece("black", "king")),
+                        new Square(new Piece("black", "bishop")),
+                        new Square(new Piece("black", "knight")),
+                        new Square(new Piece("black", "rook"))
                 }, {
                 //second row of the board
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn")),
-                new Square(new Piece("white", "pawn"))
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn")),
+                new Square(new Piece("black", "pawn"))
         }, {
                 //third row of the board
                 new Square(null),
