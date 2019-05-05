@@ -695,6 +695,16 @@ public class MainActivity extends AppCompatActivity {
                     turn.setText(R.string.black_to_move);
                 }
             }
+            if (piece == WB1 || piece == WB2) {
+                if (canWhiteBishopMove(piece, to.getId())) {
+                    from.setImageResource(R.drawable.transparent);
+                    from.setTag(R.drawable.transparent);
+                    to.setImageResource(piece);
+                    to.setTag(piece);
+                    whiteToMove = false;
+                    turn.setText(R.string.black_to_move);
+                }
+            }
         } else {
             if (moveTo == BB1 || moveTo == BB2 || moveTo == BK || moveTo == BKn1 || moveTo == BKn2 || moveTo == BP1 || moveTo == BP2 || moveTo == BP3 || moveTo == BP4 || moveTo == BP5 || moveTo == BP6 || moveTo == BP7 || moveTo == BP8 || moveTo == BQ || moveTo == BR1 || moveTo == BR2) {
                 return;
@@ -732,6 +742,16 @@ public class MainActivity extends AppCompatActivity {
                     turn.setText(R.string.white_to_move);
                 }
             }
+            if (piece == BB1 || piece == BB2) {
+                if (canBlackBishopMove(piece, to.getId())) {
+                    from.setImageResource(R.drawable.transparent);
+                    from.setTag(R.drawable.transparent);
+                    to.setImageResource(piece);
+                    to.setTag(piece);
+                    whiteToMove = true;
+                    turn.setText(R.string.white_to_move);
+                }
+            }
         }
     }
 
@@ -746,7 +766,7 @@ public class MainActivity extends AppCompatActivity {
             { "null", "null", "null", "null", "null", "null", "null", "null" },
             { "null", "null", "null", "null", "null", "null", "null", "null" },
             { "noWhitePawn1", "noWhitePawn2", "noWhitePawn3", "noWhitePawn4", "noWhitePawn5", "noWhitePawn6", "noWhitePawn7", "noWhitePawn8" },
-            { "whiteRook1", "whiteKnight1", "whiteBishop1", "whiteKing", "whiteQueen", "whiteBishop2", "whiteKnight2", "whiteKnight2"}
+            { "whiteRook1", "whiteKnight1", "whiteBishop1", "whiteKing", "whiteQueen", "whiteBishop2", "whiteKnight2", "whiteRook2"}
     };
 
     /**
@@ -1161,7 +1181,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 if (R.id.E6 == moveTo && board[5][5].equals("null")) {
-                    board[5][5] = "whitePawn6";
+                    board[4][5] = "whitePawn6";
                     board[6][5] = "null";
                     return true;
                 }
@@ -1295,7 +1315,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn1") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn1";
@@ -1338,7 +1358,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn2") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn2";
@@ -1381,7 +1401,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn3") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn3";
@@ -1424,7 +1444,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn4") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn4";
@@ -1467,10 +1487,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn5") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
-                        board[i + 1][j] = "whitePawn5";
+                        board[i + 1][j] = "blackPawn5";
                         board[i][j] = "null";
                         return true;
                     }
@@ -1510,7 +1530,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn6") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn6";
@@ -1553,7 +1573,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn7") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn7";
@@ -1591,7 +1611,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             }
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < 7; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn8") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn8";
@@ -1622,7 +1642,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public boolean canWhiteRookMove(int piece, int moveTo) {
         if (piece == WR1) {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("whiteRook1")) {
                         for (int k = 0; k < 8; k++) {
@@ -1676,7 +1696,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (piece == WR2) {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("whiteRook2")) {
                         for (int k = 0; k < 8; k++) {
@@ -1740,7 +1760,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public boolean canBlackRookMove(int piece, int moveTo) {
         if (piece == BR1) {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackRook1")) {
                         for (int k = 0; k < 8; k++) {
@@ -1794,7 +1814,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (piece == BR2) {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackRook2")) {
                         for (int k = 0; k < 8; k++) {
@@ -2037,6 +2057,402 @@ public class MainActivity extends AppCompatActivity {
                             board[i - 1][j - 2] = "blackKnight2";
                             board[i][j] = "null";
                             return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean canWhiteBishopMove(int piece, int moveTo){
+        if (piece == WB1) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("whiteBishop1")) {
+                        int m = j - 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "whiteBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "whiteBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("whiteBishop1")) {
+                        int m = j - 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "whiteBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "whiteBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("whiteBishop2")) {
+                        int m = j - 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop2";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i - 1; n > k + 2; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "whiteBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop2";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "whiteBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("whiteBishop2")) {
+                        int m = j - 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop2";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "whiteBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop2";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "whiteBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean canBlackBishopMove(int piece, int moveTo){
+        if (piece == BB1) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("blackBishop1")) {
+                        int m = j - 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "blackBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "blackBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("blackBishop1")) {
+                        int m = j - 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "blackBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "blackBishop1";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("blackBishop2")) {
+                        int m = j - 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "blackBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "blackBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].equals("blackBishop2")) {
+                        int m = j - 1;
+                        for (int k = i + 1; k < board.length; k++) {
+                            if (converter(k ,m) == moveTo) {
+                                if (k == j - 1 && m == i + 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j - 1;
+                                for (int n = i + 1; n < k; n++) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p--;
+                                }
+                                board[k][m] = "blackBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m--;
+                        }
+                        m = j + 1;
+                        for (int k = i - 1; k > 0; k--) {
+                            if (converter(k, m) == moveTo) {
+                                if (k == j + 1 && m == i - 1) {
+                                    board[k][m] = "whiteBishop1";
+                                    board[i][j] = "null";
+                                    return true;
+                                }
+                                int p = j + 1;
+                                for (int n = i - 1; n > k; n--) {
+                                    if (!board[n][p].equals("null")) {
+                                        return false;
+                                    }
+                                    p++;
+                                }
+                                board[k][m] = "blackBishop2";
+                                board[i][j] = "null";
+                                return true;
+                            }
+                            m++;
                         }
                     }
                 }

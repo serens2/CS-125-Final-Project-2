@@ -14,4 +14,5 @@ public class Square {
     void setPiece(Piece setPiece) {
         piece = setPiece;
     }
+
 }
