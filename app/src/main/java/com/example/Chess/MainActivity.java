@@ -838,8 +838,10 @@ public class MainActivity extends AppCompatActivity {
             letter = "F";
         } else if (i == 6) {
             letter = "G";
-        } else {
+        } else if (i == 7) {
             letter = "H";
+        } else {
+            return -1;
         }
         if (j == 0) {
             number = "1";
@@ -855,8 +857,10 @@ public class MainActivity extends AppCompatActivity {
             number = "6";
         } else if (j == 6){
             number = "7";
-        } else {
+        } else if (j == 7){
             number = "8";
+        } else {
+            return -1;
         }
         location = letter + number;
         if (location.equals("A1")) {
@@ -2727,7 +2731,7 @@ public class MainActivity extends AppCompatActivity {
                             m--;
                         }
                         m = j + 1;
-                        for (int k = i - 1; k > -1; k--) {
+                        for (int k = i - 1; k >= 0; k--) {
                             if (converter(k, m) == moveTo) {
                                 if (k == j + 1 && m == i - 1) {
                                     board[k][m] = "whiteBishop1";
@@ -2735,7 +2739,7 @@ public class MainActivity extends AppCompatActivity {
                                     return true;
                                 }
                                 int p = j + 1;
-                                for (int n = i - 1; n > k; n--) {
+                                for (int n = i - 1; n > k + 1; n--) {
                                     if (!board[n][p].equals("null")) {
                                         return false;
                                     }
@@ -2819,6 +2823,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 board[k][m] = "whiteBishop2";
                                 board[i][j] = "null";
+                                System.out.println("Yes");
                                 return true;
                             }
                             m--;
@@ -2955,13 +2960,13 @@ public class MainActivity extends AppCompatActivity {
                         int m = j - 1;
                         for (int k = i - 1; k > -1; k--) {
                             if (converter(k ,m) == moveTo) {
-                                if (k == j - 1 && m == i - 1) {
-                                    board[k][m] = "whiteBishop1";
-                                    board[i][j] = "null";
-                                    return true;
-                                }
+                                System.out.println(k);
+                                System.out.println(m);
                                 int p = j - 1;
                                 for (int n = i - 1; n > k; n--) {
+                                    if (p < 0) {
+                                        break;
+                                    }
                                     if (!board[n][p].equals("null")) {
                                         return false;
                                     }
@@ -2998,7 +3003,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board[i].length + 1; j++) {
+                for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackBishop2")) {
                         int m = j - 1;
                         for (int k = i + 1; k < board.length; k++) {
