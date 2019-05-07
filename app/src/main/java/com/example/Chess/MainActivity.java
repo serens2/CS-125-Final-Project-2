@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.spark.submitbutton.SubmitButton;
+
 public class MainActivity extends AppCompatActivity {
     private int WP1 = R.drawable.white_pawn1;
     private int WP2 = R.drawable.white_pawn2;
@@ -127,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView H7 = findViewById(R.id.H7);
         final ImageView H8 = findViewById(R.id.H8);
 
-        final Button UNDO = findViewById(R.id.undoButton);
+        final SubmitButton UNDO = findViewById(R.id.undoButton);
 
         H1.setTag(R.drawable.white_rook1);
         H2.setTag(R.drawable.white_knight1);
@@ -649,12 +652,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        UNDO.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void OnClick(View v) {
-//                undo();
-//            }
-//        });
+        UNDO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                undoButton(fromForUndo, toForUndo, pieceForUndo);
+            }
+        });
     }
 
     public void go(ImageView square) {
@@ -784,13 +787,8 @@ public class MainActivity extends AppCompatActivity {
         from.setTag(piece);
         to.setImageResource(R.drawable.transparent);
         to.setTag(R.drawable.transparent);
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (piece == WP1) {
-                    return;
-                }
-            }
-        }
+        board[rowFromForUndo][columnToForUndo] = boardPieceForUndo;
+        board[rowToForUndo][columnToForUndo] = "null";
         if (whiteToMove) {
             whiteToMove = false;
             turn.setText(R.string.black_to_move);
@@ -798,6 +796,8 @@ public class MainActivity extends AppCompatActivity {
             whiteToMove = true;
             turn.setText(R.string.white_to_move);
         }
+        findViewById(R.id.undoButton).clearAnimation();
+        pieceForUndo = -1;
     }
 
     /**
@@ -1007,6 +1007,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 0;
                     rowToForUndo = 5;
                     columnToForUndo = 0;
+                    boardPieceForUndo = "noWhitePawn1";
                     return true;
                 }
                 if (R.id.F2 == moveTo && !board[5][1].equals("null")) {
@@ -1016,6 +1017,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 0;
                     rowToForUndo = 5;
                     columnToForUndo = 1;
+                    boardPieceForUndo = "noWhitePawn1";
                     return true;
                 }
                 if (R.id.E1 == moveTo && board[5][0].equals("null")) {
@@ -1025,18 +1027,20 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 0;
                     rowToForUndo = 4;
                     columnToForUndo = 0;
+                    boardPieceForUndo = "noWhitePawn1";
                     return true;
                 }
             }
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("whitePawn1") && board[i - 1][j].equals("null") && converter(i - 1, j) == moveTo) {
-                        board[i - 1][j] = "whitePawn1";
                         board[i][j] = "null";
+                        boardPieceForUndo = board[i][j];
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn1") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1045,7 +1049,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn1") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1054,7 +1059,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1069,7 +1075,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 1;
                     rowToForUndo = 5;
                     columnToForUndo = 1;
-
+                    boardPieceForUndo = "noWhitePawn2";
                     return true;
                 }
                 if (R.id.F1 == moveTo && !board[5][0].equals("null")) {
@@ -1079,6 +1085,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 1;
                     rowToForUndo = 5;
                     columnToForUndo = 0;
+                    boardPieceForUndo = "noWhitePawn2";
                     return true;
                 }
                 if (R.id.F3 == moveTo && !board[5][2].equals("null")) {
@@ -1088,6 +1095,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 1;
                     rowToForUndo = 5;
                     columnToForUndo = 2;
+                    boardPieceForUndo = "noWhitePawn2";
                     return true;
                 }
                 if (R.id.E2 == moveTo && board[5][1].equals("null")) {
@@ -1097,6 +1105,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 1;
                     rowToForUndo = 4;
                     columnToForUndo = 1;
+                    boardPieceForUndo = "noWhitePawn2";
                     return true;
                 }
             }
@@ -1109,6 +1118,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn2") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1117,7 +1127,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn2") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1126,7 +1137,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1141,6 +1153,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 2;
                     rowToForUndo = 5;
                     columnToForUndo = 2;
+                    boardPieceForUndo = "noWhitePawn3";
                     return true;
                 }
                 if (R.id.F2 == moveTo && !board[5][1].equals("null")) {
@@ -1150,6 +1163,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 2;
                     rowToForUndo = 5;
                     columnToForUndo = 1;
+                    boardPieceForUndo = "noWhitePawn3";
                     return true;
                 }
                 if (R.id.F4 == moveTo && !board[5][3].equals("null")) {
@@ -1159,6 +1173,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 2;
                     rowToForUndo = 5;
                     columnToForUndo = 3;
+                    boardPieceForUndo = "noWhitePawn3";
                     return true;
                 }
                 if (R.id.E3 == moveTo && board[5][2].equals("null")) {
@@ -1168,6 +1183,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 2;
                     rowToForUndo = 4;
                     columnToForUndo = 2;
+                    boardPieceForUndo = "noWhitePawn3";
                     return true;
                 }
             }
@@ -1179,7 +1195,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn3") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1189,6 +1206,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn3") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1197,7 +1215,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1212,6 +1231,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 3;
                     rowToForUndo = 5;
                     columnToForUndo = 3;
+                    boardPieceForUndo = "noWhitePawn4";
                     return true;
                 }
                 if (R.id.F3 == moveTo && !board[5][2].equals("null")) {
@@ -1221,6 +1241,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 3;
                     rowToForUndo = 5;
                     columnToForUndo = 2;
+                    boardPieceForUndo = "noWhitePawn4";
                     return true;
                 }
                 if (R.id.F5 == moveTo && !board[5][4].equals("null")) {
@@ -1230,6 +1251,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 3;
                     rowToForUndo = 5;
                     columnToForUndo = 4;
+                    boardPieceForUndo = "noWhitePawn4";
                     return true;
                 }
                 if (R.id.E4 == moveTo && board[5][3].equals("null")) {
@@ -1239,6 +1261,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 3;
                     rowToForUndo = 4;
                     columnToForUndo = 3;
+                    boardPieceForUndo = "noWhitePawn4";
                     return true;
                 }
             }
@@ -1251,6 +1274,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn4") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1259,7 +1283,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn4") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1268,7 +1293,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1283,6 +1309,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 4;
                     rowToForUndo = 5;
                     columnToForUndo = 4;
+                    boardPieceForUndo = "noWhitePawn5";
                     return true;
                 }
                 if (R.id.F4 == moveTo && !board[5][3].equals("null")) {
@@ -1292,6 +1319,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 4;
                     rowToForUndo = 5;
                     columnToForUndo = 3;
+                    boardPieceForUndo = "noWhitePawn5";
                     return true;
                 }
                 if (R.id.F6 == moveTo && !board[5][5].equals("null")) {
@@ -1301,6 +1329,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 4;
                     rowToForUndo = 5;
                     columnToForUndo = 5;
+                    boardPieceForUndo = "noWhitePawn5";
                     return true;
                 }
                 if (R.id.E5 == moveTo && board[5][4].equals("null")) {
@@ -1310,6 +1339,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 4;
                     rowToForUndo = 4;
                     columnToForUndo = 4;
+                    boardPieceForUndo = "noWhitePawn5";
                     return true;
                 }
             }
@@ -1322,6 +1352,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn5") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1330,7 +1361,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn5") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1339,7 +1371,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1354,6 +1387,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 5;
                     rowToForUndo = 5;
                     columnToForUndo = 5;
+                    boardPieceForUndo = "noWhitePawn6";
                     return true;
                 }
                 if (R.id.F5 == moveTo && !board[5][4].equals("null")) {
@@ -1363,6 +1397,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 5;
                     rowToForUndo = 5;
                     columnToForUndo = 5;
+                    boardPieceForUndo = "noWhitePawn6";
                     return true;
                 }
                 if (R.id.F7 == moveTo && !board[5][6].equals("null")) {
@@ -1372,6 +1407,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 5;
                     rowToForUndo = 5;
                     columnToForUndo = 6;
+                    boardPieceForUndo = "noWhitePawn6";
                     return true;
                 }
                 if (R.id.E6 == moveTo && board[5][5].equals("null")) {
@@ -1381,6 +1417,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 5;
                     rowToForUndo = 4;
                     columnToForUndo = 5;
+                    boardPieceForUndo = "noWhitePawn6";
                     return true;
                 }
             }
@@ -1393,6 +1430,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn6") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1401,7 +1439,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn6") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1410,7 +1449,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1425,6 +1465,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 6;
                     rowToForUndo = 5;
                     columnToForUndo = 6;
+                    boardPieceForUndo = "noWhitePawn7";
                     return true;
                 }
                 if (R.id.F6 == moveTo && !board[5][5].equals("null")) {
@@ -1434,6 +1475,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 6;
                     rowToForUndo = 5;
                     columnToForUndo = 5;
+                    boardPieceForUndo = "noWhitePawn7";
                     return true;
                 }
                 if (R.id.F8 == moveTo && !board[5][7].equals("null")) {
@@ -1443,6 +1485,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 6;
                     rowToForUndo = 5;
                     columnToForUndo = 7;
+                    boardPieceForUndo = "noWhitePawn7";
                     return true;
                 }
                 if (R.id.E7 == moveTo && board[5][6].equals("null")) {
@@ -1452,6 +1495,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 6;
                     rowToForUndo = 4;
                     columnToForUndo = 6;
+                    boardPieceForUndo = "noWhitePawn7";
                     return true;
                 }
             }
@@ -1464,6 +1508,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn7") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1472,7 +1517,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn7") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1481,7 +1527,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1497,6 +1544,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 7;
                     rowToForUndo = 5;
                     columnToForUndo = 7;
+                    boardPieceForUndo = "noWhitePawn8";
                     return true;
                 }
                 if (R.id.F7 == moveTo && !board[5][6].equals("null")) {
@@ -1507,6 +1555,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 7;
                     rowToForUndo = 5;
                     columnToForUndo = 6;
+                    boardPieceForUndo = "noWhitePawn8";
                     return true;
                 }
                 if (R.id.E8 == moveTo && board[5][7].equals("null")) {
@@ -1517,6 +1566,7 @@ public class MainActivity extends AppCompatActivity {
                     columnFromForUndo = 7;
                     rowToForUndo = 4;
                     columnToForUndo = 7;
+                    boardPieceForUndo = "noWhitePawn8";
                     return true;
                 }
             }
@@ -1530,6 +1580,7 @@ public class MainActivity extends AppCompatActivity {
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
                         rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn8") && converter(i - 1, j - 1) == moveTo && !board[i - 1][j - 1].equals("null")) {
@@ -1539,7 +1590,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("whitePawn8") && converter(i - 1, j + 1) == moveTo && !board[i - 1][j + 1].equals("null")) {
@@ -1549,7 +1601,8 @@ public class MainActivity extends AppCompatActivity {
                         rowFromForUndo = i;
                         columnToForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1570,16 +1623,31 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C1 == moveTo) {
                     board[2][0] = "blackPawn1";
                     board[1][0] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 0;
+                    rowToForUndo = 2;
+                    columnToForUndo = 0;
+                    boardPieceForUndo = "noBlackPawn1";
                     return true;
                 }
                 if (R.id.C2 == moveTo && !board[2][1].equals("null")) {
                     board[2][1] = "blackPawn1";
                     board[1][0] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 0;
+                    rowToForUndo = 2;
+                    columnToForUndo = 1;
+                    boardPieceForUndo = "noBlackPawn1";
                     return true;
                 }
                 if (R.id.D1 == moveTo && board[3][0].equals("null")) {
                     board[3][0] = "blackPawn1";
                     board[1][0] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 0;
+                    rowToForUndo = 3;
+                    columnToForUndo = 0;
+                    boardPieceForUndo = "noBlackPawn1";
                     return true;
                 }
             }
@@ -1588,16 +1656,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn1") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn1";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn1") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn1";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn1") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn1";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1608,21 +1691,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C2 == moveTo) {
                     board[2][1] = "blackPawn2";
                     board[1][1] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 1;
+                    rowToForUndo = 2;
+                    columnToForUndo = 1;
+                    boardPieceForUndo = "noBlackPawn2";
                     return true;
                 }
                 if (R.id.C1 == moveTo && !board[2][0].equals("null")) {
                     board[2][0] = "blackPawn2";
                     board[1][1] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 1;
+                    rowToForUndo = 2;
+                    columnToForUndo = 0;
+                    boardPieceForUndo = "noBlackPawn2";
                     return true;
                 }
                 if (R.id.C3 == moveTo && !board[2][2].equals("null")) {
                     board[2][2] = "blackPawn2";
                     board[1][1] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 1;
+                    rowToForUndo = 2;
+                    columnToForUndo = 2;
+                    boardPieceForUndo = "noBlackPawn2";
                     return true;
                 }
                 if (R.id.D2 == moveTo && board[3][1].equals("null")) {
                     board[3][1] = "blackPawn2";
                     board[1][1] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 1;
+                    rowToForUndo = 3;
+                    columnToForUndo = 1;
+                    boardPieceForUndo = "noBlackPawn2";
                     return true;
                 }
             }
@@ -1631,16 +1734,30 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn2") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn2";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn2") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn2";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn2") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn2";
-                        board[i][j] = "null";
+                        board[i][j] = "null";rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1651,21 +1768,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C3 == moveTo) {
                     board[2][2] = "blackPawn3";
                     board[1][2] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 2;
+                    rowToForUndo = 2;
+                    columnToForUndo = 2;
+                    boardPieceForUndo = "noBlackPawn3";
                     return true;
                 }
                 if (R.id.C2 == moveTo && !board[2][1].equals("null")) {
                     board[2][1] = "blackPawn3";
                     board[1][2] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 2;
+                    rowToForUndo = 2;
+                    columnToForUndo = 1;
+                    boardPieceForUndo = "noBlackPawn3";
                     return true;
                 }
                 if (R.id.C4 == moveTo && !board[2][3].equals("null")) {
                     board[2][3] = "blackPawn3";
                     board[1][2] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 2;
+                    rowToForUndo = 2;
+                    columnToForUndo = 3;
+                    boardPieceForUndo = "noBlackPawn3";
                     return true;
                 }
                 if (R.id.D3 == moveTo && board[3][2].equals("null")) {
                     board[3][2] = "blackPawn3";
                     board[1][2] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 2;
+                    rowToForUndo = 3;
+                    columnToForUndo = 2;
+                    boardPieceForUndo = "noBlackPawn3";
                     return true;
                 }
             }
@@ -1673,17 +1810,30 @@ public class MainActivity extends AppCompatActivity {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn3") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn3";
-                        board[i][j] = "null";
+                        board[i][j] = "null";rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn3") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn3";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn3") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn3";
-                        board[i][j] = "null";
+                        board[i][j] = "null";rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1694,21 +1844,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C4 == moveTo) {
                     board[2][3] = "blackPawn4";
                     board[1][3] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 3;
+                    rowToForUndo = 2;
+                    columnToForUndo = 3;
+                    boardPieceForUndo = "noBlackPawn4";
                     return true;
                 }
                 if (R.id.C3 == moveTo && !board[2][2].equals("null")) {
                     board[2][2] = "blackPawn4";
                     board[1][3] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 3;
+                    rowToForUndo = 2;
+                    columnToForUndo = 2;
+                    boardPieceForUndo = "noBlackPawn4";
                     return true;
                 }
                 if (R.id.C5 == moveTo && !board[2][4].equals("null")) {
                     board[2][4] = "blackPawn4";
                     board[1][3] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 3;
+                    rowToForUndo = 2;
+                    columnToForUndo = 4;
+                    boardPieceForUndo = "noBlackPawn4";
                     return true;
                 }
                 if (R.id.D4 == moveTo && board[2][3].equals("null")) {
                     board[3][3] = "blackPawn4";
                     board[1][3] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 3;
+                    rowToForUndo = 3;
+                    columnToForUndo = 3;
+                    boardPieceForUndo = "noBlackPawn4";
                     return true;
                 }
             }
@@ -1717,16 +1887,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn4") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn4";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn4") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn4";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn4") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn4";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1737,21 +1922,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C5 == moveTo) {
                     board[2][4] = "blackPawn5";
                     board[1][4] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 4;
+                    rowToForUndo = 2;
+                    columnToForUndo = 4;
+                    boardPieceForUndo = "noBlackPawn5";
                     return true;
                 }
                 if (R.id.C4 == moveTo && !board[2][3].equals("null")) {
                     board[2][3] = "blackPawn5";
                     board[1][4] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 4;
+                    rowToForUndo = 2;
+                    columnToForUndo = 3;
+                    boardPieceForUndo = "noBlackPawn5";
                     return true;
                 }
                 if (R.id.C6 == moveTo && !board[2][5].equals("null")) {
                     board[2][5] = "blackPawn5";
                     board[1][4] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 4;
+                    rowToForUndo = 2;
+                    columnToForUndo = 5;
+                    boardPieceForUndo = "noBlackPawn5";
                     return true;
                 }
                 if (R.id.D5 == moveTo && board[2][4].equals("null")) {
                     board[3][4] = "blackPawn5";
                     board[1][4] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 4;
+                    rowToForUndo = 3;
+                    columnToForUndo = 4;
+                    boardPieceForUndo = "noBlackPawn5";
                     return true;
                 }
             }
@@ -1760,16 +1965,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn5") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn5";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn5") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn5";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn5") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn5";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1780,21 +2000,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C6 == moveTo) {
                     board[2][5] = "blackPawn6";
                     board[1][5] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 5;
+                    rowToForUndo = 2;
+                    columnToForUndo = 5;
+                    boardPieceForUndo = "noBlackPawn6";
                     return true;
                 }
                 if (R.id.C5 == moveTo && !board[2][4].equals("null")) {
                     board[2][4] = "blackPawn6";
                     board[1][5] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 5;
+                    rowToForUndo = 2;
+                    columnToForUndo = 4;
+                    boardPieceForUndo = "noBlackPawn6";
                     return true;
                 }
                 if (R.id.C7 == moveTo && !board[2][6].equals("null")) {
                     board[2][6] = "blackPawn6";
                     board[1][5] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 5;
+                    rowToForUndo = 2;
+                    columnToForUndo = 6;
+                    boardPieceForUndo = "noBlackPawn6";
                     return true;
                 }
                 if (R.id.D6 == moveTo && board[3][5].equals("null")) {
                     board[3][5] = "blackPawn6";
                     board[1][5] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 5;
+                    rowToForUndo = 3;
+                    columnToForUndo = 5;
+                    boardPieceForUndo = "noBlackPawn6";
                     return true;
                 }
             }
@@ -1803,16 +2043,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn6") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn6";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn6") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn6";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn6") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn6";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1823,21 +2078,41 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C7 == moveTo) {
                     board[2][6] = "blackPawn7";
                     board[1][6] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 6;
+                    rowToForUndo = 2;
+                    columnToForUndo = 6;
+                    boardPieceForUndo = "noBlackPawn7";
                     return true;
                 }
                 if (R.id.C6 == moveTo && !board[2][5].equals("null")) {
                     board[2][5] = "blackPawn7";
                     board[1][6] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 6;
+                    rowToForUndo = 2;
+                    columnToForUndo = 5;
+                    boardPieceForUndo = "noBlackPawn7";
                     return true;
                 }
                 if (R.id.C8 == moveTo && !board[2][7].equals("null")) {
                     board[2][7] = "blackPawn7";
                     board[1][6] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 6;
+                    rowToForUndo = 2;
+                    columnToForUndo = 7;
+                    boardPieceForUndo = "noBlackPawn7";
                     return true;
                 }
                 if (R.id.D7 == moveTo && board[3][6].equals("null")) {
                     board[3][6] = "blackPawn7";
                     board[1][6] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 6;
+                    rowToForUndo = 3;
+                    columnToForUndo = 6;
+                    boardPieceForUndo = "noBlackPawn7";
                     return true;
                 }
             }
@@ -1846,16 +2121,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn7") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn7";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn7") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn7";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn7") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn7";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }
@@ -1866,16 +2156,31 @@ public class MainActivity extends AppCompatActivity {
                 if (R.id.C8 == moveTo) {
                     board[2][7] = "blackPawn8";
                     board[1][7] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 7;
+                    rowToForUndo = 2;
+                    columnToForUndo = 7;
+                    boardPieceForUndo = "noBlackPawn8";
                     return true;
                 }
                 if (R.id.C7 == moveTo && !board[2][6].equals("null")) {
                     board[2][6] = "blackPawn8";
                     board[1][7] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 7;
+                    rowToForUndo = 2;
+                    columnToForUndo = 6;
+                    boardPieceForUndo = "noBlackPawn8";
                     return true;
                 }
                 if (R.id.D8 == moveTo && board[3][7].equals("null")) {
                     board[3][7] = "blackPawn8";
                     board[1][7] = "null";
+                    rowFromForUndo = 1;
+                    columnFromForUndo = 7;
+                    rowToForUndo = 3;
+                    columnToForUndo = 7;
+                    boardPieceForUndo = "noBlackPawn8";
                     return true;
                 }
             }
@@ -1884,16 +2189,31 @@ public class MainActivity extends AppCompatActivity {
                     if (board[i][j].equals("blackPawn8") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn8";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn8") && converter(i + 1, j - 1) == moveTo && !board[i + 1][j - 1].equals("null")) {
                         board[i + 1][j - 1] = "blackPawn8";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j - 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn8") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn8";
                         board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnToForUndo = j;
+                        rowToForUndo = i + 1;
+                        rowFromForUndo = j + 1;
+                        boardPieceForUndo = board[i][j];
                         return true;
                     }
                 }

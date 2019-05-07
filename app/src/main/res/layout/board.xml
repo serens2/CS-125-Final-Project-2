@@ -707,13 +707,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/H5" />
 
-    <Button
+    <com.spark.submitbutton.SubmitButton
         android:id="@+id/undoButton"
-        android:layout_width="150dp"
-        android:layout_height="103dp"
-        android:text="Undo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="496dp"
+        android:text="@string/undo_button"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sub_btn_background="@color/white"
+        app:sub_btn_duration="1800"
+        app:sub_btn_line_color="@color/dark"
+        app:sub_btn_ripple_color="@color/foregroundColor"
+        app:sub_btn_tick_color="@color/sub_btn_background" />
 
 </android.support.constraint.ConstraintLayout>
 
