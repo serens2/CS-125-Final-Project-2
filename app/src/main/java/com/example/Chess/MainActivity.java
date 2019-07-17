@@ -1509,9 +1509,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j] = "whitePawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1519,9 +1519,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j - 1] = "whitePawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1529,9 +1529,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j + 1] = "whitePawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1581,9 +1581,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j] = "whitePawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1592,9 +1592,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j - 1] = "whitePawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1603,9 +1603,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i - 1][j + 1] = "whitePawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i - 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1661,9 +1661,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn1";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1671,9 +1671,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn1";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1681,9 +1681,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn1";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnFromForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1739,9 +1739,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn2";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1749,18 +1749,19 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn2";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn2") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn2";
-                        board[i][j] = "null";rowFromForUndo = i;
-                        columnToForUndo = j;
+                        board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1814,10 +1815,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int j = 0; j < board[i].length; j++) {
                     if (board[i][j].equals("blackPawn3") && board[i + 1][j].equals("null") && converter(i + 1, j) == moveTo) {
                         board[i + 1][j] = "blackPawn3";
-                        board[i][j] = "null";rowFromForUndo = i;
-                        columnToForUndo = j;
+                        board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1825,18 +1827,19 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn3";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
                     if (board[i][j].equals("blackPawn3") && converter(i + 1, j + 1) == moveTo && !board[i + 1][j + 1].equals("null")) {
                         board[i + 1][j + 1] = "blackPawn3";
-                        board[i][j] = "null";rowFromForUndo = i;
-                        columnToForUndo = j;
+                        board[i][j] = "null";
+                        rowFromForUndo = i;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1892,9 +1895,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn4";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1902,9 +1905,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn4";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1912,9 +1915,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn4";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1970,9 +1973,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn5";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1980,9 +1983,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn5";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -1990,9 +1993,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn5";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2048,9 +2051,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn6";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2058,9 +2061,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn6";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2068,9 +2071,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn6";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2126,9 +2129,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2136,9 +2139,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2146,9 +2149,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn7";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2194,9 +2197,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j] = "blackPawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j;
+                        columnToForUndo = j;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2204,9 +2207,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j - 1] = "blackPawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j - 1;
+                        columnToForUndo = j - 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2214,9 +2217,9 @@ public class MainActivity extends AppCompatActivity {
                         board[i + 1][j + 1] = "blackPawn8";
                         board[i][j] = "null";
                         rowFromForUndo = i;
-                        columnToForUndo = j;
+                        columnFromForUndo = j;
                         rowToForUndo = i + 1;
-                        rowFromForUndo = j + 1;
+                        columnToForUndo = j + 1;
                         boardPieceForUndo = board[i][j];
                         return true;
                     }
@@ -2247,6 +2250,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "whiteRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 } else {
                                     for (int m = j + 1; m < k; m++) {
@@ -2256,6 +2264,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "whiteRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 }
                             }
@@ -2270,6 +2283,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "whiteRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 } else {
                                     for (int m = i + 1; m < k; m++) {
@@ -2279,6 +2297,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "whiteRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 }
                             }
@@ -2301,6 +2324,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "whiteRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 } else {
                                     for (int m = j + 1; m < k; m++) {
@@ -2310,6 +2338,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "whiteRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 }
                             }
@@ -2324,6 +2357,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "whiteRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 } else {
                                     for (int m = i + 1; m < k; m++) {
@@ -2333,6 +2371,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "whiteRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 }
                             }
@@ -2365,6 +2408,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "blackRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 } else {
                                     for (int m = j + 1; m < k; m++) {
@@ -2374,6 +2422,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "blackRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 }
                             }
@@ -2388,6 +2441,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "blackRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 } else {
                                     for (int m = i + 1; m < k; m++) {
@@ -2397,6 +2455,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "blackRook1";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 }
                             }
@@ -2419,6 +2482,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "blackRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 } else {
                                     for (int m = j + 1; m < k; m++) {
@@ -2428,6 +2496,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[i][k] = "blackRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = i;
+                                    columnToForUndo = k;
+                                    boardPieceForUndo = board[i][k];
                                     return true;
                                 }
                             }
@@ -2442,6 +2515,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "blackRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 } else {
                                     for (int m = i + 1; m < k; m++) {
@@ -2451,6 +2529,11 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     board[k][j] = "blackRook2";
                                     board[i][j] = "null";
+                                    rowFromForUndo = i;
+                                    columnFromForUndo = j;
+                                    rowToForUndo = k;
+                                    columnToForUndo = j;
+                                    boardPieceForUndo = board[k][j];
                                     return true;
                                 }
                             }
@@ -2468,6 +2551,7 @@ public class MainActivity extends AppCompatActivity {
      * @param moveTo Where the piece is being attempted to move to
      * @return True if successful, false otherwise
      */
+    // NEEDS TO BE DONE NEXT MARKING FOR LATER IE FINISH NOWWWWW RIGHT HEREEEE FOLLOW THE UNDO PATTERN
     public boolean canWhiteKnightMove(int piece, int moveTo) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
